@@ -32,20 +32,18 @@ Now you can browse the [API](http://localhost:8000/api/) or start on the [landin
 Create a kubernetes manifest for a pod which will containa ToDo app container:
 
 1. Fork this repository.
-1. Create a `pv.yml` file for `PersistentVolume` resource.
-1. `PersistentVolume` requirements:
-3.1. `PersistentVolume` class `standard`
-3.2. `PersistentVolume` persistentVolumeReclaimPolicy `Delete`
-3.3. `PersistentVolume` accessModes `ReadWriteMany`
-3.4. `PersistentVolume` capacity `1Gi`
-3.5. `PersistentVolume` type `hostPath`
-1. Create a `pvc.yml` file for `PersitentVolumeClaim` resource.
-1. `PersitentVolumeClaim` requirements:
-5.1. `PersitentVolumeClaim` should claim a `PersistentVolume` from a pvc file.
-5.2. `Deployment` should use `PersistentVolume` throught the `PersitentVolumeClaim`
-5.3 `PersistentVolume` mount path should be `/app/data`
-1. Mount existing configMap as file into /app/configs folder inside container.
-1. Mount existing secret as files into /app/secrets folder inside container
+1. Create a `statefulSet.yml` file for `StatefulSet` resource.
+1. `StatefulSet` requirement:
+3.1 `StatefulSet` should have 3 replicas
+3.2 `StatefulSet` using a MySQL db
+3.3 `StatefulSet` is reading sensetive data from a secret
+3.4 `StatefulSet` pods should have a `livenessProbe` and `readinessProbe`
+3.5 `StatefulSet` pods should have a `requests` and `limits` for `CPU` and `Memory`
+3.6 MySQL db should be inited from an `init.sql` that should be propagated as a mounted volume in `/docker-entrypoint-initdb.d`
+3.7 `StatefulSet` should have `volumeClaimTemplates`
+1. Update your application so it could connect to a db in a `StatefulSet` pod.
+1. All Sensitive information for the `Deployment` and app should be stored in a `Secret` resource.
+1. Application should read db connecion information from a `Secret` resource.
 1. `README.md` should have commands to apply all the changes
 1. `README.md` should have instructuions on how to validate the changes
 1. Create PR with your changes and attach it for validation on a platform.
