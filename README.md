@@ -45,8 +45,13 @@ Create a kubernetes manifest for a pod which will containa ToDo app container:
     6. MySQL db should be inited from an `init.sql` that should be propagated as a mounted volume in `/docker-entrypoint-initdb.d`
     7. `StatefulSet` should have `volumeClaimTemplates`
     8. `SteatefulSet` should have a headless `Service` to expose db pods
-1. Update your application so it could connect to a 0 indexed db pod (mysql-0)
-1. Application should read db connecion information from a `Secret`.
+1. `Deployment` requirments:
+    1. Update your application so it could connect to a 0 indexed db pod (mysql-0)
+    2. Application should read db connecion information from a `Secret`:
+        1. `NAME`
+        2. `USER`
+        3. `PASSWORD`
+        4. `HOST`
 1. `README.md` should have commands to apply all components in a right order
 1. `README.md` should have instructuions on how to validate the changes
 1. Create PR with your changes and attach it for validation on a platform.
