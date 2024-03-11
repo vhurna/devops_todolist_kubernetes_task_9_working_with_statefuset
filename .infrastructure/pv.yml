@@ -4,6 +4,7 @@ metadata:
   name: pv-data
   namespace: todoapp
 spec:
+  storageClassName: standard
   persistentVolumeReclaimPolicy: Delete
   accessModes:
     - ReadWriteMany
